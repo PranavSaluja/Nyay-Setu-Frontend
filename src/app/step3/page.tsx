@@ -2,16 +2,13 @@
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import {
-  ArrowRight,
   ArrowLeft,
   Mic,
   MicOff,
   Play,
   Pause,
   Volume2,
-  User,
   Scale,
-  MessageSquare,
   RefreshCw,
 } from "lucide-react";
 // import { useRouter } from 'next/navigation';
@@ -227,10 +224,10 @@ export default function EnhancedVoiceConsultation() {
     setError("");
   };
 
-  const handleNext = () => {
-    // router.push('/step4');
-    console.log("Navigate to step 4");
-  };
+  // const handleNext = () => {
+  //   router.push('/step4');
+  //   // console.log("Navigate to step 4");
+  // };
 
   const handleBack = () => {
     if (currentStep === "response") {

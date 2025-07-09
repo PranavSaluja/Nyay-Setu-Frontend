@@ -38,7 +38,7 @@ export default function Step2Page() {
       setError(error instanceof Error ? error.message : 'Failed to check status');
       setIsLoading(false);
     }
-  }, []);
+  }, [API_BASE_URL]);
 
   const handleClearDocument = async () => {
     setIsClearing(true);

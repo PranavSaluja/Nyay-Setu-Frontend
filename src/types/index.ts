@@ -1,4 +1,4 @@
-/ types/index.ts
+// / types/index.ts
 export interface DocumentStatus {
   document_loaded: boolean;
   filename?: string;
