@@ -250,8 +250,17 @@ export default function EnhancedVoiceConsultation() {
   }, [audioUrl]);
 
   const handleStartOver = () => {
-    router.push("/");
-  };
+  // Trigger clear-document API
+  fetch(`${API_BASE_URL}/clear-document`, {
+    method: 'POST',
+  }).catch((err) => {
+    console.error("Failed to clear document:", err);
+  });
+
+  // Immediately redirect to homepage
+  router.push('/');
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
