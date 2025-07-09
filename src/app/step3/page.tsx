@@ -229,16 +229,16 @@ export default function EnhancedVoiceConsultation() {
   //   // console.log("Navigate to step 4");
   // };
 
-  const handleBack = () => {
-    if (currentStep === "response") {
-      setCurrentStep("question");
-    } else if (currentStep === "question") {
-      setCurrentStep("language");
-    } else {
-      // router.push('/step2');
-      console.log("Navigate to step 2");
-    }
-  };
+  // const handleBack = () => {
+  //   if (currentStep === "response") {
+  //     setCurrentStep("question");
+  //   } else if (currentStep === "question") {
+  //     setCurrentStep("language");
+  //   } else {
+  //     // router.push('/step2');
+  //     console.log("Navigate to step 2");
+  //   }
+  // };
 
   useEffect(() => {
     if (audioRef.current) {
@@ -260,6 +260,9 @@ export default function EnhancedVoiceConsultation() {
   // Immediately redirect to homepage
   router.push('/');
 };
+
+const videoRef = useRef<HTMLVideoElement>(null);
+
 
 
   return (
@@ -413,144 +416,110 @@ export default function EnhancedVoiceConsultation() {
 
         {/* Response Section */}
         {currentStep === "response" && (
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 mb-8">
-            <div className="text-center mb-8">
-              <div className="relative mx-auto w-40 h-40 mb-6">
-                {/* AI Lawyer Avatar */}
-                <div
-                  className={`w-full h-full align-middle ${
-                    aiSpeaking ? "animate-pulse" : ""
-                  }`}
-                >
-                  <DotLottieReact
-                    key={aiSpeaking ? "playing" : "paused"}
-                    className="w-140 h-auto -translate-x-50 -translate-y-15"
-                    src="https://lottie.host/bb47f2da-01d7-49a6-beda-6846c510403c/bm9bNo71sH.lottie"
-                    loop
-                    autoplay={aiSpeaking}
-                  />
-                  {/* </div> */}
-                </div>
+  <div className="w-screen h-screen relative overflow-hidden bg-black -ml-80">
+    {/* Fullscreen AI Video */}
+    <video
+      ref={videoRef}
+      src="/ai-avatar.mp4" // make sure it's in the public/ folder
+      autoPlay
+      muted
+      loop={true}
+      playsInline
+      className="absolute top-0 left-0 w-full h-full object-cover z-0"
+    />
 
-                {/* Speaking Animation Ring */}
-                {aiSpeaking && (
-                  <>
-                    <div className="absolute -inset-2 rounded-full border-2 border-orange-400 animate-ping"></div>
-                    <div
-                      className="absolute -inset-4 rounded-full border-2 border-orange-300 animate-ping"
-                      style={{ animationDelay: "0.3s" }}
-                    ></div>
-                    <div
-                      className="absolute -inset-6 rounded-full border-2 border-orange-200 animate-ping"
-                      style={{ animationDelay: "0.6s" }}
-                    ></div>
-                  </>
-                )}
+    {/* Overlay for contrast */}
+    <div className="absolute inset-0 bg-black/20 z-10"></div>
 
-                {/* Thought Bubble when thinking */}
-                {isLoading && (
-                  <div className="absolute -top-8 -right-8 bg-white rounded-full px-3 py-2 shadow-lg">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></div>
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
-                    </div>
-                  </div>
-                )}
-              </div>
+    {/* Foreground UI Controls */}
+    <div className="relative z-20 flex flex-col justify-end h-full items-center p-6 space-y-6">
+      
+      {/* Audio Element */}
+      {audioUrl && (
+        <audio
+          ref={audioRef}
+          src={audioUrl}
+          autoPlay
+          onEnded={() => {
+            setIsPlaying(false);
+            setAiSpeaking(false);
+          }}
+          onPlay={() => {
+            setIsPlaying(true);
+            setAiSpeaking(true);
+            videoRef.current?.play();
+          }}
+          onPause={() => {
+            setIsPlaying(false);
+            setAiSpeaking(false);
+            videoRef.current?.pause();
+          }}
+        />
+      )}
 
-              <h3 className="text-2xl font-semibold text-white mb-2">
-                {aiSpeaking ? "Speaking..." : "AI Legal Assistant"}
-              </h3>
-              <p className="text-slate-300">
-                {aiSpeaking
-                  ? "Listen carefully to my analysis"
-                  : "Here's my analysis of your question"}
-              </p>
-            </div>
+      {/* Play / Pause Button */}
+      {audioUrl && (
+        <button
+          onClick={() => {
+            if (isPlaying) {
+              audioRef.current?.pause();
+              videoRef.current?.pause();
+            } else {
+              audioRef.current?.play();
+              videoRef.current?.play();
+            }
+            setIsPlaying(!isPlaying);
+          }}
+          className={`px-6 py-5 ${
+            isPlaying ? "bg-red-600/50 hover:bg-red-700" : "bg-green-600/50 hover:bg-green-700"
+          } text-white rounded-full shadow-lg text-lg font-semibold transition-all justify-center items-center`}
+        >
+          {isPlaying ? (
+            <>
+              <Pause className="w-6 h-6 inline" />
+              {/* Pause Response */}
+            </>
+          ) : (
+            <>
+              <Play className="w-6 h-6 inline" />
+              {/* Resume Response */}
+            </>
+          )}
+        </button>
+      )}
 
-            {lastQuery && (
-              <div className="bg-slate-700/30 rounded-xl p-6 mb-6">
-                <div className="flex items-center space-x-3 mb-3">
-                  <Volume2 className="w-5 h-5 text-blue-400" />
-                  <span className="text-white font-medium">Your Question</span>
-                </div>
-                <p className="text-slate-300 bg-slate-800/50 rounded-lg p-4">
-                  {lastQuery}
-                </p>
-              </div>
-            )}
+      {/* Last Question Display */}
+      {lastQuery && (
+        <div className="bg-slate-900/70 text-white p-4 rounded-xl shadow-lg max-w-3xl w-full text-center text-lg">
+          <p className="font-semibold text-orange-400 mb-2">Your Question</p>
+          <p className="text-slate-200">{lastQuery}</p>
+        </div>
+      )}
 
-            {audioUrl && (
-              <div className="bg-slate-700/30 rounded-xl p-6">
-                <div className="flex items-center space-x-3 mb-4">
-                  <Scale className="w-5 h-5 text-orange-400" />
-                  <span className="text-white font-medium">
-                    Legal Analysis & Response
-                  </span>
-                </div>
+      {/* Action Buttons */}
+      <div className="flex flex-col md:flex-row items-center gap-4 mt-4">
+        <button
+          onClick={askNewQuestion}
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium shadow-md"
+        >
+          Ask Another Question
+        </button>
+        <button
+          onClick={handleStartOver}
+          className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium shadow-md"
+        >
+          <RefreshCw className="w-5 h-5" />
+          Start Over
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
-                <div className="flex items-center space-x-4 mb-4">
-                  <button
-                    onClick={togglePlayback}
-                    className={`w-16 h-16 rounded-full flex items-center justify-center transition-all transform hover:scale-105 ${
-                      isPlaying
-                        ? "bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/50"
-                        : "bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/50"
-                    }`}
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-8 h-8 text-white" />
-                    ) : (
-                      <Play className="w-8 h-8 text-white" />
-                    )}
-                  </button>
 
-                  <div className="flex-1 bg-slate-800/50 rounded-lg p-4">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-sm text-slate-300">
-                        Audio Response
-                      </span>
-                    </div>
-                    <audio
-                      ref={audioRef}
-                      src={audioUrl}
-                      onEnded={() => setIsPlaying(false)}
-                      onPlay={() => setIsPlaying(true)}
-                      onPause={() => setIsPlaying(false)}
-                      className="w-full"
-                      controls
-                    />
-                  </div>
-                </div>
 
-                <div className="text-center mb-4">
-                  <p className="text-slate-300 italic">
-                    {isPlaying
-                      ? "🎧 Listen to my professional legal analysis"
-                      : "Click play to hear my detailed response"}
-                  </p>
-                </div>
 
-                <button
-                  onClick={askNewQuestion}
-                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors font-medium"
-                >
-                  Ask Another Question
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Navigation */}
+        {/* Navigation
         <div className="flex justify-between">
           <button
             onClick={handleBack}
@@ -569,7 +538,7 @@ export default function EnhancedVoiceConsultation() {
               <span>Start Over</span>
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
