@@ -33,7 +33,7 @@ export default function EnhancedVoiceConsultation() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>("");
   const [showListening, setShowListening] = useState(false);
-  const [aiSpeaking, setAiSpeaking] = useState(false);
+  const [, setAiSpeaking] = useState(false);
   const [currentStep, setCurrentStep] = useState<
     "language" | "question" | "response"
   >("language");
