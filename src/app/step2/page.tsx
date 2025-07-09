@@ -11,7 +11,7 @@ export default function Step2Page() {
   const router = useRouter();
   const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL;
 
-  const [statusChecked, setStatusChecked] = useState(false);
+  const [, setStatusChecked] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('Uploading...');
 
   useEffect(() => {

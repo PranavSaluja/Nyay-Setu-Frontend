@@ -154,7 +154,7 @@ export default function HomePage() {
   );
 }
 
-function Feature({ icon: Icon, label, color }: { icon: any; label: string; color: string }) {
+function Feature({ icon: Icon, label, color }: { icon: React.ComponentType<{ className?: string }>; label: string; color: string }) {
   return (
     <div className="flex items-center space-x-3">
       <div className={`w-10 h-10 bg-${color}-500/20 rounded-lg flex items-center justify-center`}>
