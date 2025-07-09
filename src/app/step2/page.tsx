@@ -97,7 +97,7 @@ export default function Step2Page() {
           </div>
           <h1 className="text-4xl font-bold text-white mb-4">Document Processing</h1>
           <p className="text-slate-300 text-lg">
-            We're analyzing your legal document to prepare personalized assistance
+            We are analyzing your legal document to prepare personalized assistance
           </p>
         </div>
 
