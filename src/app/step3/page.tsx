@@ -2,12 +2,10 @@
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import {
-  ArrowLeft,
   Mic,
   MicOff,
   Play,
   Pause,
-  Volume2,
   Scale,
   RefreshCw,
 } from "lucide-react";
@@ -199,18 +197,18 @@ export default function EnhancedVoiceConsultation() {
     }
   }, [mediaRecorder]);
 
-  const togglePlayback = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setAiSpeaking(false);
-      } else {
-        audioRef.current.play();
-        setAiSpeaking(true);
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
+  // const togglePlayback = () => {
+  //   if (audioRef.current) {
+  //     if (isPlaying) {
+  //       audioRef.current.pause();
+  //       setAiSpeaking(false);
+  //     } else {
+  //       audioRef.current.play();
+  //       setAiSpeaking(true);
+  //     }
+  //     setIsPlaying(!isPlaying);
+  //   }
+  // };
 
   const selectLanguage = (langCode: string) => {
     setSelectedLanguage(langCode);
