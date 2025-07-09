@@ -259,7 +259,7 @@ export default function EnhancedVoiceConsultation() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-block bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm font-medium mb-4">
-            3/4
+            2/2
           </div>
           <h1 className="text-4xl font-bold text-white mb-4">
             Voice Consultation
