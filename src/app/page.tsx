@@ -195,7 +195,7 @@ const NyaySetuApp = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const closeVideo = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const closeVideo = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
     // Stop and reset video when closing
