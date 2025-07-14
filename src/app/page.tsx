@@ -193,9 +193,9 @@ const NyaySetuApp = () => {
   const { icon, title, detail } = steps[stepIndex];
 
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const closeVideo = (e) => {
+  const closeVideo = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
     // Stop and reset video when closing
@@ -204,10 +204,10 @@ const NyaySetuApp = () => {
       videoRef.current.currentTime = 0;
       videoRef.current.load(); // Force reload to reset completely
     }
-    setIsVideoOpen(false);
+    // setIsVideoOpen(false);
   };
 
-  const openVideo = (e) => {
+  const openVideo = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setIsVideoOpen(true);
@@ -551,13 +551,13 @@ const NyaySetuApp = () => {
   );
 
   const HowItWorksSection = () => {
-  const [hoveredStep, setHoveredStep] = useState(null);
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visibleSteps, setVisibleSteps] = useState(new Set());
   const [showSummary, setShowSummary] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
   const [showCTA, setShowCTA] = useState(false);
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const lineRef = useRef(null);
 
   useEffect(() => {
@@ -587,12 +587,16 @@ const NyaySetuApp = () => {
       const newVisibleSteps = new Set();
       
       stepElements.forEach((element) => {
-        const stepRect = element.getBoundingClientRect();
-        // More lenient visibility check
-        if (stepRect.top < windowHeight * 0.9 && stepRect.bottom > -100) {
-          newVisibleSteps.add(parseInt(element.dataset.step));
-        }
-      });
+  const htmlElement = element as HTMLElement; // Narrow the type
+  const stepRect = htmlElement.getBoundingClientRect();
+
+  // More lenient visibility check
+  const step = htmlElement.dataset.step;
+  if (step && stepRect.top < windowHeight * 0.9 && stepRect.bottom > -100) {
+    newVisibleSteps.add(parseInt(step));
+  }
+});
+
       
       setVisibleSteps(newVisibleSteps);
 
