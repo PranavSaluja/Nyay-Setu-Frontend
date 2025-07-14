@@ -268,7 +268,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
       <div className="max-w-4xl w-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-block bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm font-medium mb-4">
+          <div className="inline-block bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-medium mb-4">
             2/2
           </div>
           <h1 className="text-4xl font-bold text-white mb-4">
@@ -283,7 +283,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
         {currentStep === "language" && (
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 mb-8">
             <div className="text-center mb-8">
-              <Scale className="w-16 h-16 text-orange-400 mx-auto mb-4" />
+              <Scale className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold text-white mb-4">
                 Select Your Preferred Language
               </h3>
@@ -297,7 +297,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
                 <button
                   key={lang.code}
                   onClick={() => selectLanguage(lang.code)}
-                  className="p-6 rounded-xl border-2 border-slate-600 hover:border-orange-500 hover:bg-orange-500/10 text-slate-300 hover:text-white transition-all transform hover:scale-105"
+                  className="p-6 rounded-xl border-2 border-slate-600 hover:border-yellow-500 hover:bg-yellow-500/10 text-slate-300 hover:text-white transition-all transform hover:scale-105"
                 >
                   <div className="text-xl font-semibold mb-2">{lang.name}</div>
                   <div className="text-sm opacity-75">Click to select</div>
@@ -325,7 +325,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
               </h3>
               <p className="text-slate-300">
                 Speaking in:{" "}
-                <span className="text-orange-400 font-medium">
+                <span className="text-yellow-400 font-medium">
                   {languages.find((l) => l.code === selectedLanguage)?.name}
                 </span>
               </p>
@@ -341,7 +341,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
                       ? "bg-red-500 animate-pulse shadow-lg shadow-red-500/50"
                       : showListening
                       ? "bg-yellow-500 animate-pulse shadow-lg shadow-yellow-500/50"
-                      : "bg-orange-500 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/50"
+                      : "bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg hover:shadow-yellow-500/50"
                   } disabled:bg-slate-600 disabled:cursor-not-allowed transform hover:scale-105`}
                 >
                   {isRecording ? (
@@ -489,7 +489,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
       {/* Last Question Display */}
       {lastQuery && (
         <div className="bg-slate-900/70 text-white p-4 rounded-xl shadow-lg max-w-3xl w-full text-center text-lg">
-          <p className="font-semibold text-orange-400 mb-2">Your Question</p>
+          <p className="font-semibold text-yellow-400 mb-2">Your Question</p>
           <p className="text-slate-200">{lastQuery}</p>
         </div>
       )}
@@ -504,7 +504,7 @@ const videoRef = useRef<HTMLVideoElement>(null);
         </button>
         <button
           onClick={handleStartOver}
-          className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium shadow-md"
+          className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-medium shadow-md"
         >
           <RefreshCw className="w-5 h-5" />
           Start Over

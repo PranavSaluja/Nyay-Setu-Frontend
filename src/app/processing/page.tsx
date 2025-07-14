@@ -26,7 +26,7 @@ export default function Step2Page() {
           clearInterval(interval);
           setLoadingMessage('Document uploaded successfully. Redirecting...');
           setTimeout(() => {
-            router.push('/step3');
+            router.push('/ask');
           }, 1500);
         } else {
           // Once the first check happens, show "Analyzing..." instead of "Uploading..."
@@ -45,7 +45,7 @@ export default function Step2Page() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
       <div className="text-center">
-        <div className="animate-spin w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-6"></div>
+        <div className="animate-spin w-16 h-16 border-4 border-yellow-500 border-t-transparent rounded-full mx-auto mb-6"></div>
         <h1 className="text-3xl font-bold text-white mb-2">{loadingMessage}</h1>
         <p className="text-slate-300">Please wait while we process your file.</p>
       </div>

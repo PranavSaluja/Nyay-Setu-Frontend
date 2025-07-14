@@ -57,7 +57,7 @@ export default function HomePage() {
         ...data
       }));
 
-      router.push('/step2');
+      router.push('/processing');
     } catch (error: unknown) {
       console.error("Upload failed:", error);
       setError(error instanceof Error ? error.message : 'Upload failed. Please try again.');
@@ -70,7 +70,7 @@ export default function HomePage() {
       {/* Fullscreen Loading Overlay */}
       {isUploading && (
         <div className="absolute inset-0 bg-slate-900 bg-opacity-90 flex flex-col items-center justify-center z-50">
-          <Loader2 className="w-12 h-12 text-orange-500 animate-spin mb-4" />
+          <Loader2 className="w-12 h-12 text-yellow-500 animate-spin mb-4" />
           <h2 className="text-xl text-white font-semibold">Uploading...</h2>
         </div>
       )}
@@ -78,7 +78,7 @@ export default function HomePage() {
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 items-center">
         {/* Left Content */}
         <div className="text-white space-y-6">
-          <div className="inline-block bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm font-medium">
+          <div className="inline-block bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm font-medium">
             1/2
           </div>
 
@@ -103,7 +103,7 @@ export default function HomePage() {
         {/* Right Upload Area */}
         <div className="flex justify-center lg:justify-end">
           <div className="w-full max-w-md">
-            <div className="border-2 border-dashed border-orange-500/50 rounded-2xl p-8 text-center bg-slate-800/50 backdrop-blur-sm hover:border-orange-500/70 transition-colors">
+            <div className="border-2 border-dashed border-yellow-500/50 rounded-2xl p-8 text-center bg-slate-800/50 backdrop-blur-sm hover:border-yellow-500/70 transition-colors">
               <div className="w-24 h-24 mx-auto mb-6 bg-slate-700/50 rounded-full flex items-center justify-center">
                 <Upload className="w-12 h-12 text-slate-400" />
               </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
                 <button
                   onClick={handleUploadAndNext}
                   disabled={!file || isUploading}
-                  className="w-full py-3 px-6 bg-orange-500 hover:bg-orange-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
+                  className="w-full py-3 px-6 bg-yellow-500 hover:bg-yellow-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
                 >
                   Upload & Continue
                 </button>
