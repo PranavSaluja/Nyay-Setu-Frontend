@@ -18,18 +18,11 @@ import {
   Linkedin,
   Instagram,
   Play,
-  Star,
   Globe,
   Shield,
   Zap,
-  Eye,
-  EyeOff,
-  User,
-  Lock,
-  ArrowLeft,
-  ChevronRight,
-  Sparkles, Gavel, BookOpen, Award,
-  UploadCloud, Languages, MessageSquare, Bot,
+  Sparkles, Gavel, BookOpen,
+  Languages, Bot,
   ArrowDown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -172,7 +165,7 @@ const NyaySetuApp = () => {
     </nav>
   );
 
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, ] = useState(0);
   
   const steps = [
     {
@@ -220,46 +213,6 @@ const NyaySetuApp = () => {
     setIsVideoOpen(true);
   };
 
-  // Add event listeners to prevent auto-reload
-  // useEffect(() => {
-  //   const video = videoRef.current;
-  //   if (video && isVideoOpen) {
-  //     const handleLoadStart = () => {
-  //       console.log('Video loading started');
-  //     };
-      
-  //     const handleError = (e) => {
-  //       console.log('Video error:', e);
-  //       // Prevent reload on error
-  //       e.preventDefault();
-  //       return false;
-  //     };
-
-  //     const handleAbort = (e) => {
-  //       console.log('Video loading aborted');
-  //       e.preventDefault();
-  //       return false;
-  //     };
-
-  //     const handleStalled = (e) => {
-  //       console.log('Video stalled');
-  //       e.preventDefault();
-  //       return false;
-  //     };
-
-  //     video.addEventListener('loadstart', handleLoadStart);
-  //     video.addEventListener('error', handleError);
-  //     video.addEventListener('abort', handleAbort);
-  //     video.addEventListener('stalled', handleStalled);
-
-  //     return () => {
-  //       video.removeEventListener('loadstart', handleLoadStart);
-  //       video.removeEventListener('error', handleError);
-  //       video.removeEventListener('abort', handleAbort);
-  //       video.removeEventListener('stalled', handleStalled);
-  //     };
-  //   }
-  // }, [isVideoOpen]);
 
   // const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
@@ -621,7 +574,7 @@ const NyaySetuApp = () => {
       
       if (sectionBottom > 0 && sectionTop < windowHeight) {
         // Calculate progress based on how much of the section has been scrolled through
-        const visibleHeight = Math.min(windowHeight, sectionBottom) - Math.max(0, sectionTop);
+        // const visibleHeight = Math.min(windowHeight, sectionBottom) - Math.max(0, sectionTop);
         const totalScrollableHeight = sectionHeight + windowHeight;
         const scrolledDistance = Math.max(0, windowHeight - sectionTop);
         
