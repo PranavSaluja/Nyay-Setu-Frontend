@@ -56,7 +56,7 @@ const NyaySetuApp = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage]);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
