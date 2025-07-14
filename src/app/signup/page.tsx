@@ -56,9 +56,9 @@ export default function SignupPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 py-8">
       {/* Background Animation */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-orange-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-orange-600 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-yellow-600 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
       </div>
 
       <div className="w-full max-w-lg relative z-10">
@@ -70,7 +70,7 @@ export default function SignupPage() {
           className="text-center mb-8"
         >
           <div className="flex items-center justify-center mb-6">
-            <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-3 rounded-2xl">
+            <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 p-3 rounded-2xl">
               <Scale className="w-8 h-8 text-white" />
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function SignupPage() {
                 name="userType"
                 value={formData.userType}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
               >
                 <option value="individual" className="bg-slate-800">Individual</option>
                 <option value="lawyer" className="bg-slate-800">Legal Professional</option>
@@ -118,7 +118,7 @@ export default function SignupPage() {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
+                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
                     placeholder="First name"
                   />
                 </div>
@@ -263,15 +263,15 @@ export default function SignupPage() {
                 checked={formData.agreeTerms}
                 onChange={handleChange}
                 required
-                className="mt-1 w-4 h-4 text-orange-600 bg-white/10 border-white/20 rounded focus:ring-orange-500 focus:ring-2"
+                className="mt-1 w-4 h-4 text-yellow-600 bg-white/10 border-white/20 rounded focus:ring-yellow-500 focus:ring-2"
               />
               <label htmlFor="agreeTerms" className="text-sm text-gray-300">
                 I agree to the{' '}
-                <Link href="/terms" className="text-orange-500 hover:text-orange-400 underline">
+                <Link href="/terms" className="text-yellow-500 hover:text-yellow-400 underline">
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link href="/privacy" className="text-orange-500 hover:text-orange-400 underline">
+                <Link href="/privacy" className="text-yellow-500 hover:text-yellow-400 underline">
                   Privacy Policy
                 </Link>
               </label>
@@ -283,7 +283,7 @@ export default function SignupPage() {
               disabled={!formData.agreeTerms || isLoading}
               whileHover={{ scale: (!formData.agreeTerms || isLoading) ? 1 : 1.02 }}
               whileTap={{ scale: (!formData.agreeTerms || isLoading) ? 1 : 0.98 }}
-              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -303,7 +303,7 @@ export default function SignupPage() {
           <div className="mt-6 text-center">
             <p className="text-gray-300">
               Already have an account?{' '}
-              <Link href="/login" className="text-orange-500 hover:text-orange-400 font-semibold">
+              <Link href="/login" className="text-yellow-500 hover:text-yellow-400 font-semibold">
                 Sign in here
               </Link>
             </p>

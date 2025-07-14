@@ -710,7 +710,7 @@ const NyaySetuApp = () => {
   ];
 
   return (
-    <div ref={sectionRef} className="py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+    <div id="how-it-works" ref={sectionRef} className="py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400 rounded-full blur-3xl"></div>
@@ -1000,21 +1000,25 @@ const NyaySetuApp = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            {
-              name: "Pranav",
-              role: "Backend Developer",
-              description: "Expert in NLP and machine learning with 8+ years in legal tech"
-            },
-            {
-              name: "Nikhil Deshmukh",
-              role: "Frontend Developer",
-              description: "Senior advocate with expertise in constitutional and corporate law"
-            },
-            {
-              name: "Somala Bharath Sai",
-              role: "QA Speciality",
-              description: "Passionate about user experience and accessible technology"
-            }
+  {
+    name: "Pranav",
+    role: "Backend Developer",
+    description: "Seasoned backend developer with over 8 years of experience in natural language processing and machine learning, especially within the legal tech domain. Adept at building scalable APIs and intelligent systems.",
+    image: "https://ui-avatars.com/api/?name=Pranav&background=0D8ABC&color=fff"
+  },
+  {
+    name: "Nikhil Deshmukh",
+    role: "Frontend Developer",
+    description: "Frontend developer with a keen eye for detail and strong legal acumen. Merges constitutional and corporate law knowledge with UI/UX expertise to build intuitive, legally-aware user interfaces.",
+    image: "https://ui-avatars.com/api/?name=Nikhil+Deshmukh&background=FFB300&color=fff"
+  },
+  {
+    name: "Somala Bharath Sai",
+    role: "QA Specialist",
+    description: "Quality assurance expert dedicated to delivering seamless user experiences. Passionate about accessibility, usability, and building inclusive digital products that reach everyone.",
+    image: "https://ui-avatars.com/api/?name=Somala+Bharath+Sai&background=2E7D32&color=fff"
+  }
+
           ].map((member, index) => (
             <div key={index} className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="relative mb-6">
