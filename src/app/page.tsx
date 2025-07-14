@@ -882,7 +882,7 @@ const NyaySetuApp = () => {
                 their legal background or language preference.
               </p>
               <p className="leading-relaxed">
-                We believe that justice should be accessible to all. That's why we've created an 
+                We believe that justice should be accessible to all. That&apos;s why we&apos;ve created an 
                 innovative solution that translates legal complexity into simple, understandable 
                 language, empowering individuals to make informed decisions about their legal matters.
               </p>
@@ -1073,12 +1073,6 @@ const NyaySetuApp = () => {
   // Main App Router
   const renderPage = () => {
     switch (currentPage) {
-      case 'login':
-        return <LoginPage />;
-      case 'signup':
-        return <SignupPage />;
-      case 'dashboard':
-        return <LandingPage />;
       default:
         return <LandingPage />;
     }

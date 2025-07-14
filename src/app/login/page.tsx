@@ -214,7 +214,7 @@ export default function LoginPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-center mt-8"
           >
-            <span className="text-gray-400">Don't have an account? </span>
+            <span className="text-gray-400">Don&apos;t have an account? </span>
             <Link
               href="/signup"
               className="text-yellow-500 hover:text-yellow-400 font-medium transition-colors"
