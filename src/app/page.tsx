@@ -273,7 +273,7 @@ const NyaySetuApp = () => {
   };
 
   const HeroSection = () => (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center overflow-hidden">
+    <section id="home" className="relative min-h-screen bg-gradient-to-t from-gray-900 via-gray-800 to-gray-900 flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-black/20"></div>
       
       {/* Animated background elements */}
@@ -597,7 +597,324 @@ const NyaySetuApp = () => {
     </section>
   );
 
-  
+  const HowItWorksSection = () => {
+  const [hoveredStep, setHoveredStep] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [visibleSteps, setVisibleSteps] = useState(new Set());
+  const [showSummary, setShowSummary] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
+  const [showCTA, setShowCTA] = useState(false);
+  const sectionRef = useRef(null);
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !lineRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Improved scroll progress calculation
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      const sectionBottom = sectionTop + sectionHeight;
+      
+      if (sectionBottom > 0 && sectionTop < windowHeight) {
+        // Calculate progress based on how much of the section has been scrolled through
+        const visibleHeight = Math.min(windowHeight, sectionBottom) - Math.max(0, sectionTop);
+        const totalScrollableHeight = sectionHeight + windowHeight;
+        const scrolledDistance = Math.max(0, windowHeight - sectionTop);
+        
+        const progress = Math.max(0, Math.min(1, scrolledDistance / totalScrollableHeight));
+        setScrollProgress(progress);
+      }
+
+      // Check which steps are visible with more lenient conditions
+      const stepElements = sectionRef.current.querySelectorAll('[data-step]');
+      const newVisibleSteps = new Set();
+      
+      stepElements.forEach((element) => {
+        const stepRect = element.getBoundingClientRect();
+        // More lenient visibility check
+        if (stepRect.top < windowHeight * 0.9 && stepRect.bottom > -100) {
+          newVisibleSteps.add(parseInt(element.dataset.step));
+        }
+      });
+      
+      setVisibleSteps(newVisibleSteps);
+
+      // Check visibility for summary, features, and CTA sections
+      const summaryElement = sectionRef.current.querySelector('[data-summary]');
+      const featuresElement = sectionRef.current.querySelector('[data-features]');
+      const ctaElement = sectionRef.current.querySelector('[data-cta]');
+
+      if (summaryElement) {
+        const summaryRect = summaryElement.getBoundingClientRect();
+        setShowSummary(summaryRect.top < windowHeight * 0.8 && summaryRect.bottom > 0);
+      }
+
+      if (featuresElement) {
+        const featuresRect = featuresElement.getBoundingClientRect();
+        setShowFeatures(featuresRect.top < windowHeight * 0.8 && featuresRect.bottom > 0);
+      }
+
+      if (ctaElement) {
+        const ctaRect = ctaElement.getBoundingClientRect();
+        setShowCTA(ctaRect.top < windowHeight * 0.8 && ctaRect.bottom > 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const steps = [
+    {
+      icon: Upload,
+      title: "Upload PDF Document",
+      description: "Upload your legal document in PDF format. Our system securely processes and extracts all text content from your document.",
+      step: "01",
+      color: "from-yellow-400 to-yellow-500",
+      bgColor: "bg-black",
+      iconColor: "text-yellow-400"
+    },
+    {
+      icon: Languages,
+      title: "Choose Your Language",
+      description: "Select your preferred language from English, Hindi, Marathi, Gujarati, Punjabi, and all major Indian languages for personalized assistance.",
+      step: "02",
+      color: "from-yellow-400 to-yellow-500",
+      bgColor: "bg-black",
+      iconColor: "text-yellow-400"
+    },
+    {
+      icon: Bot,
+      title: "Meet Your AI Advocate",
+      description: "Our intelligent AI advocate is ready to answer your questions about the document. Ask anything you need to understand better.",
+      step: "03",
+      color: "from-yellow-400 to-yellow-500",
+      bgColor: "bg-black",
+      iconColor: "text-yellow-400"
+    },
+    {
+      icon: MessageCircle,
+      title: "Get Friendly Explanations",
+      description: "Receive clear, friendly responses in your selected language. Complex legal terms are explained in simple, understandable language.",
+      step: "04",
+      color: "from-yellow-400 to-yellow-500",
+      bgColor: "bg-black",
+      iconColor: "text-yellow-400"
+    }
+  ];
+
+  return (
+    <div ref={sectionRef} className="py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-yellow-400 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-2 bg-yellow-400 px-4 py-2 rounded-full mb-4">
+            <Sparkles className="w-5 h-5 text-black" />
+            <span className="text-[10px] font-semibold text-black">AI-Powered Legal Assistant</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            How It 
+            <span className="text-yellow-400"> Works</span>
+          </h2>
+          
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Transform complex legal documents into clear, understandable explanations with our AI advocate in your preferred Indian language
+          </p>
+        </div>
+
+        {/* Process Flow */}
+        <div className="relative">
+          {/* Central Process Line with Animation */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gray-700 transform -translate-x-1/2 hidden md:block">
+            <div 
+              ref={lineRef}
+              className="w-full bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-400 transition-all duration-700 ease-out"
+              style={{
+                height: `${Math.min(95, scrollProgress * 140)}%`, // Improved height calculation
+                boxShadow: scrollProgress > 0 ? '0 0 20px rgba(250, 204, 21, 0.5)' : 'none'
+              }}
+            ></div>
+          </div>
+
+          {/* Steps */}
+          <div className="space-y-16">
+            {steps.map((item, index) => (
+              <div key={index} className="relative" data-step={index + 1}>
+                {/* Step Card */}
+                <div className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} transition-all duration-1000 ${
+                  visibleSteps.has(index + 1) ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'
+                }`}>
+                  {/* Card Content */}
+                  <div className={`w-full md:w-5/12  ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
+                    <div 
+                      className={`relative p-8 rounded-2xl border-2 transition-all duration-500 transform hover:scale-105 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 cursor-pointer ${
+                        hoveredStep === index ? 'border-yellow-400 shadow-2xl shadow-yellow-400/20' : 'border-gray-800 hover:border-gray-700'
+                      } ${item.bgColor} ${visibleSteps.has(index + 1) ? 'animate-pulse-once' : ''}`}
+                      onMouseEnter={() => setHoveredStep(index)}
+                      onMouseLeave={() => setHoveredStep(null)}
+                    >
+                      {/* Step number */}
+                      <div className={`absolute -top-4 ${index % 2 === 0 ? '-right-4' : '-left-4'} w-12 h-12 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center shadow-lg transition-all duration-500 ${
+                        visibleSteps.has(index + 1) ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
+                      }`}>
+                        <span className="text-black font-bold text-lg">{item.step}</span>
+                      </div>
+
+                      {/* Icon */}
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 ${item.bgColor} border border-gray-800 flex items-center justify-center mb-6 transition-all duration-700 ${
+                        hoveredStep === index ? 'scale-110' : ''
+                      } ${visibleSteps.has(index + 1) ? 'scale-100' : 'scale-0'}`}>
+                        <item.icon className={`w-8 h-8 ${item.iconColor}`} />
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                      <p className="text-gray-300 leading-relaxed text-lg">{item.description}</p>
+
+                      {/* Hover effect overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 rounded-2xl transition-opacity duration-300 ${
+                        hoveredStep === index ? 'opacity-5' : ''
+                      }`}></div>
+                    </div>
+                  </div>
+
+                  {/* Center Circle */}
+                  <div className="hidden md:flex w-2/12 justify-center">
+                    <div className={`w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-lg z-10 transition-all duration-700 ${
+                      visibleSteps.has(index + 1) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                    }`}>
+                      <item.icon className="w-8 h-8 text-black" />
+                    </div>
+                  </div>
+
+                  {/* Empty space for alternating layout */}
+                  <div className="hidden md:block w-5/12"></div>
+                </div>
+
+                {/* Arrow Down (except for last item) */}
+                {index < steps.length-1 && (
+                  <div className="flex justify-center mt-8 md:mt-12">
+                    <div className={`w-12 h-12 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border-2 border-yellow-400 rounded-full flex items-center justify-center transition-all duration-500 ${
+                      visibleSteps.has(index + 1) && visibleSteps.has(index + 2) ? 'animate-bounce opacity-100' : 'opacity-30'
+                    }`}>
+                      <ArrowDown className="w-6 h-6 text-yellow-400" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Process Summary */}
+        <div 
+          data-summary
+          className={`mt-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border border-gray-800 rounded-3xl p-8 shadow-xl transition-all duration-1000 ${
+            showSummary ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'
+          }`}
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Complete Process Overview</h3>
+            <p className="text-gray-300 text-lg">From document upload to personalized legal explanations in your language</p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-4 text-sm">
+            <div className="flex items-center space-x-2 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4 py-2 rounded-full">
+              <Upload className="w-4 h-4 text-yellow-400" />
+              <span className="text-white">PDF Upload</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-gray-600" />
+            <div className="flex items-center space-x-2 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4 py-2 rounded-full">
+              <FileText className="w-4 h-4 text-yellow-400" />
+              <span className="text-white">Text Extraction</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-gray-600" />
+            <div className="flex items-center space-x-2 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4 py-2 rounded-full">
+              <Languages className="w-4 h-4 text-yellow-400" />
+              <span className="text-white">Language Selection</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-gray-600" />
+            <div className="flex items-center space-x-2 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4 py-2 rounded-full">
+              <Bot className="w-4 h-4 text-yellow-400" />
+              <span className="text-white">AI Analysis (ask your question)</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-gray-600" />
+            <div className="flex items-center space-x-2 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4 py-2 rounded-full">
+              <MessageCircle className="w-4 h-4 text-yellow-400" />
+              <span className="text-white">Friendly Response</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature highlights */}
+        <div 
+          data-features
+          className={`mt-12 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border border-gray-800 rounded-3xl p-8 shadow-xl transition-all duration-1000 delay-300 ${
+            showFeatures ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'
+          }`}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border border-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FileText className="w-8 h-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-2">Secure Processing</h4>
+              <p className="text-gray-300">Your documents are processed securely with end-to-end encryption</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border border-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-2">Multi-Language Support</h4>
+              <p className="text-gray-300">Available in English, Hindi, Marathi, Gujarati, Punjabi & more</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 border border-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Bot className="w-8 h-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-2">AI Advocate</h4>
+              <p className="text-gray-300">Intelligent AI that understands legal context and nuances</p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div 
+          data-cta
+          className={`text-center mt-16 transition-all duration-1000 delay-500 ${
+            showCTA ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'
+          }`}
+        >
+          <button 
+            className="group bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black px-12 py-6 rounded-full font-semibold text-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center space-x-3 shadow-xl hover:shadow-2xl"
+          >
+            <span>Start Your Legal Journey</span>
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+          </button>
+          
+          <p className="text-gray-400 mt-6 text-sm">
+            No credit card required • Free to start • Secure & Private
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
   const AboutSection = () => (
     <section id="about" className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-fixed">
