@@ -4,7 +4,7 @@
 @tailwind utilities; */
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(to bottom right, #0a0a0a, #1a1a1a, #0a0a0a);;
   --foreground: #171717;
 
   --font-sans: 'Arial', 'Helvetica', sans-serif;

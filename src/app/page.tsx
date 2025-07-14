@@ -917,7 +917,7 @@ const NyaySetuApp = () => {
 };
 
   const AboutSection = () => (
-    <section id="about" className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-fixed">
+    <section id="about" className="py-20 bg-gradient-to-t from-transparent to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -989,10 +989,10 @@ const NyaySetuApp = () => {
   );
 
   const TeamSection = () => (
-    <section id="team" className="py-20 bg-gray-50">
+    <section id="team" className="py-20 bg-gradient-to-b from-transparent to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
+          <h2 className="text-4xl font-bold text-gray-200 mb-4">Meet Our Team</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Dedicated professionals working to make legal information accessible to everyone
           </p>
