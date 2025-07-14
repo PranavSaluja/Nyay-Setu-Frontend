@@ -993,7 +993,7 @@ const NyaySetuApp = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-200 mb-4">Meet Our Team</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
             Dedicated professionals working to make legal information accessible to everyone
           </p>
         </div>
@@ -1004,13 +1004,13 @@ const NyaySetuApp = () => {
     name: "Pranav",
     role: "Backend Developer",
     description: "Seasoned backend developer with over 8 years of experience in natural language processing and machine learning, especially within the legal tech domain. Adept at building scalable APIs and intelligent systems.",
-    image: "https://ui-avatars.com/api/?name=Pranav&background=0D8ABC&color=fff"
+    image: "/pranav.jpg"
   },
   {
     name: "Nikhil Deshmukh",
     role: "Frontend Developer",
     description: "Frontend developer with a keen eye for detail and strong legal acumen. Merges constitutional and corporate law knowledge with UI/UX expertise to build intuitive, legally-aware user interfaces.",
-    image: "https://ui-avatars.com/api/?name=Nikhil+Deshmukh&background=FFB300&color=fff"
+    image: "/nikhil.png"
   },
   {
     name: "Somala Bharath Sai",
@@ -1020,12 +1020,12 @@ const NyaySetuApp = () => {
   }
 
           ].map((member, index) => (
-            <div key={index} className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+            <div key={index} className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:border-2 hover:border-yellow-500 transition-all duration-300 transform hover:-translate-y-2">
               <div className="relative mb-6">
                 <div className="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
-                  <User className="h-16 w-16 text-gray-400" />
+                  <img src={member.image} alt={member.name} className='w-full h-full object-cover'/>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent rounded-lg"></div>
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent rounded-lg"></div> */}
               </div>
               <h3 className="text-xl font-semibold text-gray-200 mb-2">{member.name}</h3>
               <p className="text-yellow-500 font-medium mb-3">{member.role}</p>
