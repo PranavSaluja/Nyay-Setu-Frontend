@@ -43,9 +43,6 @@ export default function EnhancedVoiceConsultation() {
   const [conversation, setConversation] = useState<ConversationItem[]>([]);
   const [recordingTimeout, setRecordingTimeout] =
     useState<NodeJS.Timeout | null>(null);
-  const [silenceTimeout, setSilenceTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
   const [hasWelcomed, setHasWelcomed] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
